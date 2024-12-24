@@ -203,7 +203,7 @@ controller to avoid code duplication, and interfaces for all of our public metho
 
 Interfaces and abstract classes, as well as the additional transformation class were made to keep our design clean and readable, while also keeping our original design ideas.
 
-#### Assignment 6 Update:
+#### Update:
 
 In this assignment, we implemented a graphical user interface for the application. When running the GUI, the user will be able to perform numerous operations that were previously implemented
 as well as new operations such as the image scaling tool. The gui will also constantly show a histogram of the current image that is being edited, so that the user will always see the graph representation
