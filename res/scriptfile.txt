@@ -1,0 +1,131 @@
+# Load the original image
+load Masked_images/dogs.jpg dog
+
+# Save the original image in PNG format
+save dogs.png dog
+
+# Apply grayscale transformation
+grayscale dog grayscaleDog
+save grayscaleDogs.png grayscaleDog
+
+# Apply sepia transformation
+sepia dog sepiaDog
+save sepiaDogs.png sepiaDog
+
+# Brighten the image by 50 units
+brighten 50 dog brightenedDog
+save brightenedDogs.png brightenedDog
+
+# Darken the image by 30 units
+brighten -30 dog darkenedDog
+save darkenedDogs.png darkenedDog
+
+# Apply horizontal flip
+horizontal-flip dog horizontalFlippedDog
+save horizontalFlippedDogs.png horizontalFlippedDog
+
+# Apply vertical flip
+vertical-flip dog verticalFlippedDog
+save verticalFlippedDogs.png verticalFlippedDog
+
+# Apply blur transformation
+blur dog blurredDog
+save blurredDogs.png blurredDog
+
+# Apply sharpen transformation
+sharpen dog sharpenedDog
+save sharpenedDogs.png sharpenedDog
+
+# Split RGB channels
+rgb-split dog redDog greenDog blueDog
+save redChannelDogs.png redDog
+save greenChannelDogs.png greenDog
+save blueChannelDogs.png blueDog
+
+# Combine RGB channels
+rgb-combine redDog greenDog blueDog combinedRGBDog
+save combinedRGBDogs.png combinedRGBDog
+
+# Visualize red channel
+red-component dog redVisualizedDog
+save redVisualizedDogs.png redVisualizedDog
+
+# Visualize green channel
+green-component dog greenVisualizedDog
+save greenVisualizedDogs.png greenVisualizedDog
+
+# Visualize blue channel
+blue-component dog blueVisualizedDog
+save blueVisualizedDogs.png blueVisualizedDog
+
+# Visualize intensity component
+intensity-component dog intensityDog
+save intensityDogs.png intensityDog
+
+# Visualize luma component
+luma-component dog lumaDog
+save lumaDogs.png lumaDog
+
+# Apply histogram (if this generates an image)
+histogram dog histogramDog
+save histogramDogs.png histogramDog
+
+# Apply color correction (if available)
+color-correct dog colorCorrectedDog
+save colorCorrectedDogs.png colorCorrectedDog
+
+# Apply level adjustment (example values for b, m, and w)
+levels-adjust 20 128 200 dog levelAdjustedDog
+save levelAdjustedDogs.png levelAdjustedDog
+
+# Compress the image by 50%
+compress 50 dog compressedDog
+save compressedDogs.png compressedDog
+
+# Apply split view with sepia at 50% position
+sepia dog splitSepiaDog split 50
+save splitSepiaDogs.png splitSepiaDog
+
+# Apply split view with grayscale at 50% position
+grayscale dog splitGrayDog split 50
+save splitGrayDogs.png splitGrayDog
+
+# Apply split view with sharpen at 50% position
+sharpen dog splitSharpenDog split 50
+save splitSharpenDogs.png splitSharpenDog
+
+# Apply split view with sharpen at 50% position
+levels-adjust 20 80 190 dog ladog split 50
+save ladog.png ladog
+
+# Load in a masked image
+load Masked_images/Mask.png mask
+
+# Apply Sepia with a mask
+sepia dog mask dogmask
+save sepiamask.png dogmask
+
+# Apply Grayscale with a mask
+grayscale dog mask graymask
+save graymask.png graymask
+
+# Apply Blur with a mask
+blur dog mask blurmask
+save blurmask.png blurmask
+
+# Apply Sharpen with a mask
+sharpen dog mask sharpmask
+save sharpmask.png sharpmask
+
+# Apply Red visualization with a mask
+red-component dog mask redmask
+save redmask.png redmask
+
+# Apply Green visualization with a mask
+green-component dog mask greenmask
+save greenmask.png greenmask
+
+# Apply Blue visualization with a mask
+blue-component dog mask bluemask
+save bluemask.png bluemask
+

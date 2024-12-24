@@ -1,0 +1,268 @@
+# USEME File for Assignment 5
+
+This application allows you to modify images through various commands. Below is a list of supported commands, their usage examples, the Model-View-Controller (MVC) structure, and how to navigate the project.
+
+----
+
+## Project Structure
+
+This project follows the Model-View-Controller (MVC) architecture:
+
+### 1. **Model**:
+   - Represents the application's data and business logic.
+   - Classes:
+     - `CustomImage`: Encapsulates image data (width, height, and RGB values).
+     - `Graph`: Provides data representations like histograms.
+
+### 2. **View**:
+   - Responsible for presenting information to the user.
+   - Classes:
+     - `ImageEditorGUI`: Implements a graphical interface for loading, saving, and editing images.
+
+### 3. **Controller**:
+   - Manages user input and coordinates between the model and view.
+   - Classes:
+     - `Controller`: Main orchestrator for commands and transformations.
+     - `Command`: Encapsulates user operations.
+     - `ControllerAbstract`: Provides reusable controller logic.
+
+----
+
+## Commands
+
+### General Usage
+- Each command interacts with images loaded into memory using the **load** command.
+- Output from transformations is saved under a unique name to prevent overwriting original data.
+
+### Supported Commands:
+1. **load <filepath> <imageName>**
+   - Loads an image from the specified filepath and stores it in memory under the given
+     image.
+   - **Example:** `load src/dogs.jpg dog`
+   - **Condition:** Must be executed before using other commands on the specified image.
+
+2. **save <filepath> <imageName>**
+   - Saves the specified image to the filepath in the specified format (e.g., png, jpg).
+   - **Example:** `save src/dogs.png dog`
+   - **Condition:** The image specified by imageName must be loaded first.
+
+3. **grayscale <sourceImage> <outputImageName>**
+   - Converts the specified image to grayscale and stores the result under outputImageName.
+   - **Example:** `grayscale dog grayscaleDog`
+
+4. **sepia <sourceImage> <outputImageName>**
+   - Applies a sepia filter to the specified image and stores the result under outputImageName.
+   - **Example:** `sepia dog sepiaDog`
+
+5. **brighten <increment> <sourceImage> <outputImageName>**
+   - Brightens the specified image by the given increment and saves it under outputImageName.
+   - **Example:** `brighten 50 dog brightenedDog`
+
+6. **brighten <decrement> <sourceImage> <outputImageName>**
+   - Darkens the specified image by the given decrement and saves it under outputImageName.
+   - **Example:** `darken 30 dog darkenedDog`
+   - **Condition:** Not supported by all implementations; ensure functionality before use.
+
+7. **horizontal-flip <sourceImage> <outputImageName>**
+   - Flips the specified image horizontally.
+   - **Example:** `horizontal-flip dog horizontalFlippedDog`
+
+8. **vertical-flip <sourceImage> <outputImageName>**
+   - Flips the specified image vertically.
+   - **Example:** `vertical-flip dog verticalFlippedDog`
+
+9. **blur <sourceImage> <outputImageName>**
+   - Applies a blur effect to the specified image.
+   - **Example:** `blur dog blurredDog`
+
+10. **sharpen <sourceImage> <outputImageName>**
+    - Sharpens the specified image.
+    - **Example:** `sharpen dog sharpenedDog`
+
+11. **rgb-split <sourceImage> <redImage> <greenImage> <blueImage>**
+    - Splits the RGB channels of the specified image into separate images for red, green, and blue.
+    - **Example:** `rgb-split dog redDog greenDog blueDog`
+
+12. **rgb-combine <redImage> <greenImage> <blueImage> <outputImageName>**
+    - Combines the red, green, and blue images into a single image.
+    - **Example:** `rgb-combine redDog greenDog blueDog combinedRGBDog`
+
+13. **red-component <sourceImage> <outputImageName>**
+    - Visualizes only the red channel of the image.
+    - **Example:** `red-component dog redVisualizedDog`
+
+14. **green-component <sourceImage> <outputImageName>**
+    - Visualizes only the green channel of the image.
+    - **Example:** `green-component dog greenVisualizedDog`
+
+15. **blue-component <sourceImage> <outputImageName>**
+    - Visualizes only the blue channel of the image.
+    - **Example:** `blue-component dog blueVisualizedDog`
+
+16. **intensity-component <sourceImage> <outputImageName>**
+    - Visualizes the intensity component of the image.
+    - **Example:** `intensity-component dog intensityDog`
+
+17. **luma-component <sourceImage> <outputImageName>**
+    - Visualizes the luma component of the image.
+    - **Example:** `luma-component dog lumaDog`
+
+18. **histogram <sourceImage> <outputImageName>**
+    - Generates a histogram for the specified image.
+    - **Example:** `histogram dog histogramDog`
+
+19. **color-correct <sourceImage> <outputImageName>**
+    - Applies color correction to the specified image.
+    - **Example:** `color-correct dog colorCorrectedDog`
+
+20. **levels-adjust <black> <mid> <white> <sourceImage> <outputImageName>**
+    - Adjusts the levels of the specified image based on black, mid, and white points.
+    - **Example:** `levels-adjust 20 128 200 dog levelAdjustedDog`
+
+21. **compress <percentage> <sourceImage> <outputImageName>**
+    - Compresses the specified image by the given percentage.
+    - **Example:** `compress 50 dog compressedDog`
+
+22. **<operation> <sourceImage> <outputImageName> split <position>**
+    - Applies the specified operation (e.g., sepia) to part of the image based on position.
+    - **Example:** `sepia dog splitSepiaDog split 50`
+
+23. **script <filepath>**
+    - Executes a script file containing commands in sequence.
+    - **Example:** `script path/to/script.txt`
+    - **Condition:** Ensure commands in the script file follow the correct order (e.g., `load` before
+      `save`).
+
+24. **exit**
+    - Exits the execution.
+
+----
+
+## File Organization and Dependencies
+
+### Packages
+1. **`imagemanipulation`**: Contains all core classes for transformations and utilities.
+   - `CustomImage.java`: Core image data class.
+   - `ImageUtil.java`: Handles image loading, saving, and utilities.
+   - `AbstractImageTransformations.java`: Base class for implementing effects.
+   - `AdvancedImageTransformations.java`: Advanced transformations like compression.
+
+### Key Dependencies
+- Ensure that all images are loaded using the `load` command before any operations.
+- The `script` command automates the sequence of commands but requires proper syntax in the script file.
+
+----
+
+## Notes for Improvement
+1. **File Naming**:
+   - Use more descriptive file names that align with their roles in MVC architecture.
+     - Example: `CustomImage` (Model), `Controller` (Controller), `ImageEditorGUI` (View).
+
+2. **Package Structure**:
+   - Separate files into logical packages (e.g., `model`, `view`, `controller`) for better organization.
+
+3. **Error Handling**:
+   - Add checks for missing files or commands used in incorrect order (e.g., `save` without `load`).
+
+----
+
+## Example Workflow
+1. Load an image:
+   - Command: `load src/dogs.jpg dog`
+2. Apply a grayscale transformation:
+   - Command: `grayscale dog grayscaleDog`
+3. Save the output:
+   - Command: `save output/grayscaleDog.jpg grayscaleDog`
+
+---
+
+## Exit
+- Use the `exit` command to terminate the application.
+
+
+
+## Graphical User Interface (GUI) Operations
+   - The GUI provides an intuitive way to perform image transformations. Here is how to use the operations supported by the GUI:
+
+# General Instructions
+1. **Launch the GUI**: Run the program, and the Image Editor GUI will open.
+
+2. **Import an Image**: Click on "Import File" to load an image into the editor. Supported formats: .png, .jpg, .ppm.
+
+##Operations Supported
+
+**Basic Image Controls**
+- Import an Image:
+  Click "Import File" and select the image file you want to edit.
+- Save an Image:
+  Click "Save File" and choose a location and format for saving the image.
+- Reset to Original:
+  Click "Reset to Original" to discard transformations and return to the original image.
+
+**Image Transformations**
+- Vertical Flip: Click "Vertical-Flip".
+- Horizontal Flip: Click "Horizontal-Flip".
+- Blur: Click "Blur".
+- Sharpen: Click "Sharpen".
+- Sepia: Click "Sepia".
+- Grayscale: Click "Greyscale".
+- Color Correct: Click "Color Correct".
+
+**Color Visualizations**
+- Red Component: Click "Red-Component".
+- Green Component: Click "Green-Component".
+- Blue Component: Click "Blue-Component".
+- Value Visualization: Click "Value".
+- Intensity Visualization: Click "Intensity".
+- Luma Visualization: Click "Luma".
+
+**Advanced Features**
+- Adjust Levels:
+  Use sliders for Black Level, Mid Level, and White Level.
+  Click "Apply Levels" to adjust the brightness and contrast.
+- Split View:
+  Check "Split View" to compare the original and transformed image side by side.
+  Use the "Split Percentage" slider to control the split position.
+- Load Mask:
+  Click "Load Mask" to import a mask image for selective transformations.
+  Apply Mask Transformation:
+  Select a transformation from the dropdown and click "Apply Mask Transformation".
+- Apply Compression:
+  Use the compression slider to set the level, then click "Apply Compression".
+- Apply Downscale:
+  Enter new dimensions in Width and Height fields, then click "Apply Downscale".
+- Histogram Analysis
+  The histogram for the current image is displayed at the bottom of the GUI.
+  It updates dynamically with transformations.
+
+## Example Workflow
+- Import an image:
+- GUI: Click "Import File".
+  CLI: load src/dogs.jpg dog.
+- Apply a grayscale transformation:
+  GUI: Click "Greyscale".
+  CLI: grayscale dog grayscaleDog.
+- Save the output:
+  GUI: Click "Save File".
+  CLI: save output/grayscaleDog.jpg grayscaleDog.
+
+
+## File Organization and Dependencies
+Packages
+model: Contains core classes for transformations and utilities.
+
+CustomImage.java: Core image data class.
+GraphUtil.java: Handles histogram generation.
+ImageUtil.java: Manages image I/O operations.
+view: Contains the graphical interface.
+
+ImageEditorGUI.java: Manages the GUI and user interaction.
+controller: Orchestrates command execution and integration between model and view.
+
+Controller.java: Handles command inputs.
+ControllerAbstract.java: Provides reusable logic for controllers.
+Key Dependencies
+Ensure all images are loaded using the load command before performing operations.
+Properly configure paths when using the script command for batch operations.
+
+---------
