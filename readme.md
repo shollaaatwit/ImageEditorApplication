@@ -1,6 +1,3 @@
-# Assignment 4, Image Manipulation and Enhancement
-### Rahul Nayak and Alexander Sholla
-
 ## Overview
 This project is structured to enable image manipulation and enhancement through a modular and extensible design. Below is an overview of each main class, interface, and its purpose.
 
